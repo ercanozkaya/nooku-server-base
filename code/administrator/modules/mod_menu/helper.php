@@ -134,20 +134,6 @@ class modMenuHelper
 		}
 		
 		/*
-		 * Users SubMenu
-		 */
-		$menu->addChild(new JMenuNode(JText::_('Files'), 'index.php?option=com_files', 'class:files'), true);
-		$menu->getParent();
-		
-		/*
-		 * Users SubMenu
-		 */
-		if ($canManageUsers) {
-			$menu->addChild(new JMenuNode(JText::_('Users'), 'index.php?option=com_users&view=users', 'class:user'), true);
-			$menu->getParent();
-		}
-
-		/*
 		 * Extensions SubMenu
 		 */
 		if ($installModules)
@@ -174,20 +160,13 @@ class modMenuHelper
 		/*
 		 * System SubMenu
 		 */
-		if ($canConfig || $canCheckin)
+		if ($canConfig)
 		{
 			$menu->addChild(new JMenuNode(JText::_('Tools')), true);
 			
-			if ($canConfig) {
-				$menu->addChild(new JMenuNode(JText::_('Configuration'), 'index.php?option=com_config', 'class:config'));
-				$menu->addChild(new JMenuNode(JText::_('System Info'), 'index.php?option=com_admin&task=sysinfo', 'class:info'));
-				$menu->addSeparator();
-			}
+			$menu->addChild(new JMenuNode(JText::_('Configuration'), 'index.php?option=com_config', 'class:config'));
+			$menu->addSeparator();
 
-			if ($canCheckin) {
-				$menu->addChild(new JMenuNode(JText::_('Global Checkin'), 'index.php?option=com_checkin', 'class:checkin'));
-				$menu->addSeparator();
-			}
 			$menu->addChild(new JMenuNode(JText::_('Clean Cache'), 'index.php?option=com_cache', 'class:config'));
 			$menu->getParent();
 		}

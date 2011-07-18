@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: abstract.php 3616 2011-06-26 15:59:32Z johanjanssens $
+ * @version		$Id: abstract.php 3696 2011-07-15 15:04:13Z johanjanssens $
  * @category	Koowa
  * @package		Koowa_Template
  * @copyright	Copyright (C) 2007 - 2010 Johan Janssens. All rights reserved.
@@ -58,6 +58,22 @@ abstract class KTemplateAbstract extends KObject implements KObjectIdentifiable
 	 * @var	KTemplateStack
 	 */
     protected $_stack;
+    
+    /**
+     * Template errors
+     *
+     * @var array
+     */  
+    private static $_errors = array(
+        1     => 'Fatal Error',
+        2     => 'Warning',
+        4     => 'Parse Error',
+        8     => 'Notice',
+        256   => 'User Error',
+        512   => 'User Warning',
+        2048  => 'Strict',
+        4096  => 'Recoverable Error'
+    );
     	
 	/**
 	 * Constructor
@@ -79,8 +95,34 @@ abstract class KTemplateAbstract extends KObject implements KObjectIdentifiable
 		//Register the template stream wrapper
 		KTemplateStream::register();
 		
+		//Set shutdown function to handle sandbox errors
+        register_shutdown_function(array($this, '__destroy')); 
+		
 		 // Mixin a command chain
         $this->mixin(new KMixinCommandchain($config->append(array('mixer' => $this))));
+	}
+	
+	/**
+     * Destructor
+     * 
+     * Hanlde sandbox shutdown. Clean all output buffers and display the latest error
+     * if an error is found. 
+     * 
+     * @return bool
+     */
+	public function __destroy()
+	{
+	    if(!$this->getStack()->isEmpty())
+	    {
+	        if($error = error_get_last()) 
+            {
+                if($error['type'] === E_ERROR || $error['type'] === E_PARSE) 
+                {  
+                    while(@ob_get_clean());
+                    $this->sandboxError($error['type'], $error['message'], $error['file'], $error['line']);
+                }
+            }
+	    }
 	}
 	
  	/**
@@ -432,7 +474,6 @@ abstract class KTemplateAbstract extends KObject implements KObjectIdentifiable
 		}
 		else $identifier = KFactory::identify($helper);
 	 
-		
 		//Create the template helper
 		$helper = KTemplateHelper::factory($identifier, array('template' => $this));
 		
@@ -450,6 +491,9 @@ abstract class KTemplateAbstract extends KObject implements KObjectIdentifiable
 	 */
 	private function __sandbox()
 	{	
+	    //Set the error handler
+        set_error_handler(array($this, 'sandboxError'), E_WARNING | E_NOTICE);
+	    
 	    //Set the template in the template stack
        	$this->getStack()->push(clone $this);
        
@@ -462,9 +506,35 @@ abstract class KTemplateAbstract extends KObject implements KObjectIdentifiable
 		
 		//Remove the template object from the template stack
        	$this->getStack()->pop();
+       	
+       	//Restore the error handler
+        restore_error_handler();
 		
 		return $this;
 	}
+	
+ 	/**
+     * Hanlde sandbox errors
+     * 
+     * @return bool
+     */
+    public function sandboxError($code, $message, $file = '', $line = 0, $context = array())
+    {
+        if($file == 'tmpl://lib.koowa.template.stack') 
+        {
+            if(ini_get('display_errors')) {
+                echo '<strong>'.self::$_errors[$code].'</strong>: '.$message.' in <strong>'.$this->_path.'</strong> on line <strong>'.$line.'</strong>';
+            }
+            
+            if(ini_get('log_errors')) {
+                error_log(sprintf('PHP %s:  %s in %s on line %d', self::$_errors[$code], $message, $this->_path, $line));
+            }
+            
+            return true;
+        }
+        
+        return false;
+    }
 
 	/**
 	 * Renders the template and returns the result

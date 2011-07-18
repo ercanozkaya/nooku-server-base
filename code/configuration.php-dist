@@ -1,5 +1,25 @@
 <?php
-
+/**
+* @version		$Id: configuration.php-dist 14401 2010-01-26 14:10:00Z louis $
+* @package		Joomla
+* @copyright	Copyright (C) 2005 - 2010 Open Source Matters. All rights reserved.
+* @license		GNU/GPL, see LICENSE.php
+* Joomla! is free software and parts of it may contain or be derived from the
+* GNU General Public License or other free or open source software licenses.
+* See COPYRIGHT.php for copyright notices and details.
+*
+* -------------------------------------------------------------------------
+* THIS SHOULD ONLY BE USED AS A LAST RESORT WHEN THE WEB INSTALLER FAILS
+*
+* If you are installing Joomla! manually i.e. not using the web browser installer
+* then rename this file to configuration.php e.g.
+*
+* UNIX -> mv configuration.php-dist configuration.php
+* Windows -> rename configuration.php-dist configuration.php
+*
+* Now edit this file and configure the parameters for your site and
+* database.
+*/
 class JConfig {
 	/**
 	* -------------------------------------------------------------------------
@@ -10,7 +30,7 @@ class JConfig {
 	var $offline = '0';
 	var $offline_message = 'This site is down for maintenance.<br /> Please check back again soon.';
 	var $sitename = 'Joomla!';			// Name of Joomla site
-	var $editor = 'none';
+	var $editor = 'tinymce';
 	var $list_limit = '20';
 
 	/**
@@ -39,7 +59,7 @@ class JConfig {
 	var $tmp_path	= '/tmp';
 	var $log_path	= '/var/logs';
 	var $offset = '0';
-	/*var $live_site = '';*/ 					// Optional, Full url to Joomla install.
+	var $live_site = ''; 					// Optional, Full url to Joomla install.
 	var $force_ssl = 0;		//Force areas of the site to be SSL ONLY.  0 = None, 1 = Administrator, 2 = Both Site and Administrator
 
 	/* Session settings */

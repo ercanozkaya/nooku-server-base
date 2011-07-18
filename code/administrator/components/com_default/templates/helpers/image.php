@@ -1,6 +1,6 @@
 <?php
 /**
- * @version     $Id: image.php 3228 2011-05-02 16:01:34Z johanjanssens $
+ * @version     $Id: image.php 3684 2011-07-12 11:20:10Z johanjanssens $
  * @category	Nooku
  * @package     Nooku_Components
  * @subpackage  Default
@@ -165,7 +165,7 @@ class ComDefaultTemplateHelperImage extends KTemplateHelperListbox
   			'id'		=> $config->name.'-preview',
   			'class'		=> 'preview',
   			'width'		=> $config->width,
-  			'height'	=> $config->width,
+  			'height'	=> $config->height,
   			'border'	=> $config->border,
   			'alt'		=> JText::_('Preview'),
   			'style'		=> $config->style

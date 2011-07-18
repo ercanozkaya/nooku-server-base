@@ -1,6 +1,6 @@
 <?php
 /**
- * @version     $Id: user.php 1885 2011-06-23 17:09:00Z ercanozkaya $
+ * @version     $Id: user.php 2086 2011-06-28 22:23:26Z johanjanssens $
  * @category    Nooku
  * @package     Nooku_Server
  * @subpackage  Users
@@ -328,4 +328,19 @@ class ComUsersDatabaseRowUser extends KDatabaseRowDefault
 
 		return true;
 	}
+	
+	/**
+     * Return an associative array of the data.
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        $data = parent::toArray();
+        
+        unset($data['password']);
+        unset($data['activation']);
+        
+        return $data;
+    }
 }

@@ -1,6 +1,6 @@
 <?php
 /**
-* @version      $Id: abstract.php 3600 2011-06-24 02:23:44Z johanjanssens $
+* @version      $Id: abstract.php 3679 2011-07-10 11:38:59Z johanjanssens $
 * @category		Koowa
 * @package		Koowa_Controller
 * @subpackage 	Toolbar
@@ -82,7 +82,7 @@ abstract class KControllerToolbarAbstract extends KObject implements KObjectIden
     {
         $config->append(array(
             'title'         => KInflector::humanize($this->getName()),
-            'icon'          => 'generic',
+            'icon'          => $this->getName(),
             'controller'    => null,
         ));
         
@@ -166,13 +166,13 @@ abstract class KControllerToolbarAbstract extends KObject implements KObjectIden
     }
     
     /**
-     * Add a seperator
+     * Add a separator
      *
      * @return  KControllerToolbarInterface
      */
-    public function addSeperator()
+    public function addSeparator()
     {
-        $this->_commands[] = new KControllerToolbarCommand('seperator');
+        $this->_commands[] = new KControllerToolbarCommand('separator');
         return $this;
     }
      

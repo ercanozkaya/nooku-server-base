@@ -1,6 +1,6 @@
 <?php
 /**
- * @version     $Id: default_sidebar.php 1936 2011-06-23 19:51:58Z ercanozkaya $
+ * @version     $Id: default_sidebar.php 2069 2011-06-28 12:29:23Z johanjanssens $
  * @category	Nooku
  * @package     Nooku_Server
  * @subpackage  Users
@@ -17,7 +17,7 @@ defined('KOOWA') or die( 'Restricted access' );
 	<ul>
 		<li class="<?= !is_numeric($state->group) ? 'active' : ''; ?>">
 			<a href="<?= @route('group=' ) ?>">
-			    <?= @text('All groups')?>
+			    <?= @text('All users')?>
 			</a>
 		</li>
 		<? foreach($groups as $group): ?>

@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: service.php 3622 2011-06-26 16:14:47Z johanjanssens $
+ * @version		$Id: service.php 3681 2011-07-11 13:02:19Z johanjanssens $
  * @category	Koowa
  * @package		Koowa_Controller
  * @copyright	Copyright (C) 2007 - 2010 Johan Janssens. All rights reserved.
@@ -17,20 +17,6 @@
  */
 abstract class KControllerService extends KControllerResource
 {
-	/**
-	 * Constructor
-	 *
-	 * @param 	object 	An optional KConfig object with configuration options.
-	 */
-	public function __construct(KConfig $config)
-	{
-		parent::__construct($config);
-		
-		if($config->persistable) {
-			$this->registerCallback('before.browse' , array($this, 'addBehavior'), 'persistable');
-		}
-	}
-
  	/**
      * Initializes the default configuration for the object
      *

@@ -1,6 +1,6 @@
 <?php
 /**
- * @version     $Id: mysqli.php 3271 2011-05-10 23:47:02Z johanjanssens $
+ * @version     $Id: mysqli.php 3658 2011-06-27 20:46:45Z johanjanssens $
  * @category	Nooku
  * @package     Nooku_Components
  * @subpackage  Default
@@ -20,6 +20,29 @@
  */
 class ComDefaultDatabaseAdapterMysqli extends KDatabaseAdapterMysqli
 { 
+    /**
+	 * The cache object
+	 *
+	 * @var	JCache
+	 */
+    protected $_cache;
+    
+	/**
+	 * Constructor
+	 *
+	 * Prevent creating instances of this class by making the contructor private
+	 * 
+	 * @param 	object 	An optional KConfig object with configuration options
+	 */
+	public function __construct(KConfig $config)
+	{
+		parent::__construct($config);
+	
+		if(KFactory::get('lib.joomla.config')->getValue('config.caching')) {
+	        $this->_cache = KFactory::tmp('lib.joomla.cache', array('template', 'output'));
+		}
+	}
+    
     /**
      * Initializes the options for the object
      *
@@ -54,28 +77,24 @@ class ComDefaultDatabaseAdapterMysqli extends KDatabaseAdapterMysqli
 	 */
 	public function getTableSchema($table)
 	{
-	    if(!isset($this->_table_schema[$table]))
+	    if(!isset($this->_table_schema[$table]) && isset($this->_cache))
 		{
 		    $database = $this->getDatabase();
-	        $cache = KFactory::tmp('lib.joomla.cache', array('database', 'output'));
 	        
-	        //Set the lifetime to 0 to make sure cache isn't garbage collected.
-	        $cache->setLifeTime(0);
-	   
-	        $identifier = md5($database.$table);
+		    $identifier = md5($database.$table);
 	    
-	        if (!$schema = $cache->get($identifier)) 
+	        if (!$schema = $this->_cache->get($identifier)) 
 	        {
 	            $schema = parent::getTableSchema($table);
 	            
 	            //Store the object in the cache
-		   	    $cache->store(serialize($schema), $identifier);
+		   	    $this->_cache->store(serialize($schema), $identifier);
 	        }
-	        else $schema = unserialize($schema);
-	        
-	        $this->_table_schema[$table] = $schema;
-		}
+	        else $schema = unserialize($schema);     
+		  
+		    $this->_table_schema[$table] = $schema;
+	    }
 	    
-	    return $this->_table_schema[$table];
+	    return parent::getTableSchema($table);
 	}
 }

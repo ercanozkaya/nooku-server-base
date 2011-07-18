@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: editable.php 3641 2011-06-26 23:25:31Z johanjanssens $
+ * @version		$Id: editable.php 3683 2011-07-12 11:19:11Z johanjanssens $
  * @category	Koowa
  * @package		Koowa_Controller
  * @subpackage	Command
@@ -47,8 +47,10 @@ class KControllerBehaviorEditable extends KControllerBehaviorAbstract
 	 */
 	public function getReferrer()
 	{
+	    $identifier = $this->getMixer()->getIdentifier();
+	    
 	    $referrer = KFactory::tmp('lib.koowa.http.url', 
-	        array('url' => KRequest::get('cookie.com.controller.referrer', 'url'))
+	        array('url' => KRequest::get('cookie.'.$identifier->application.'.com.controller.referrer', 'url'))
 	    );
 	    
 	    return $referrer;
@@ -61,16 +63,16 @@ class KControllerBehaviorEditable extends KControllerBehaviorAbstract
 	 */
 	public function setReferrer()
 	{								   
-	    if(!KRequest::has('cookie.com.controller.referrer'))
+	    $identifier = $this->getMixer()->getIdentifier();
+	    
+	    if(!KRequest::has('cookie.'.$identifier->application.'.com.controller.referrer'))
 	    {
 	        $referrer = KRequest::referrer();
 	        $request  = KRequest::url();
 			
 			//Compare request url and referrer
 	        if(!isset($referrer) || ((string) $referrer == (string) $request))
-		    {
-		        $identifier = $this->getMixer()->getIdentifier();
-		          
+		    {  
 		        $option = 'com_'.$identifier->package;
 		        $view   = KInflector::pluralize($identifier->name);
 		        $url    = 'index.php?option='.$option.'&view='.$view;
@@ -78,7 +80,7 @@ class KControllerBehaviorEditable extends KControllerBehaviorAbstract
 		        $referrer = KFactory::tmp('lib.koowa.http.url',array('url' => $url));
 		    }
 	        
-			KRequest::set('cookie.com.controller.referrer', (string) $referrer);
+			KRequest::set('cookie.'.$identifier->application.'.com.controller.referrer', (string) $referrer);
 		}
 	}
 	
@@ -89,7 +91,9 @@ class KControllerBehaviorEditable extends KControllerBehaviorAbstract
 	 */
 	public function unsetReferrer()
 	{								  
-	    KRequest::set('cookie.com.controller.referrer', null);
+	    $identifier = $this->getMixer()->getIdentifier();
+	    
+	    KRequest::set('cookie.'.$identifier->application.'.com.controller.referrer', null);
 	}
 	
 	/**

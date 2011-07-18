@@ -1,6 +1,6 @@
 <?php 
 /**
- * @version     $Id: default.php 1994 2011-06-26 16:27:48Z johanjanssens $
+ * @version     $Id: default.php 2122 2011-06-30 20:53:25Z johanjanssens $
  * @category	Nooku
  * @package     Nooku_Server
  * @subpackage  Modules
@@ -74,13 +74,6 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
         		</td>
         	</tr>
         <? endforeach ?>
-        <? if (!$total) : ?>
-        	<tr>
-                <td colspan="8" align="center">
-                     <?= @text('No Items Found'); ?>
-                </td>
-            </tr>
-        <? endif ?>
         </tbody>
     </table>
 </form>

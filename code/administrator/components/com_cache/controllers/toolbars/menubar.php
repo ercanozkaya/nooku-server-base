@@ -1,6 +1,6 @@
 <?php
 /**
- * @version     $Id: menubar.php 2039 2011-06-26 19:33:42Z johanjanssens $
+ * @version     $Id: menubar.php 2209 2011-07-14 11:41:54Z johanjanssens $
  * @category	Nooku
  * @package     Nooku_Server
  * @subpackage  Cache
@@ -21,13 +21,16 @@ class ComCacheControllerToolbarMenubar extends ComDefaultControllerToolbarMenuba
 {
     public function getCommands()
     { 
+         $name = $this->getController()->getIdentifier()->name;
+        
         $this->addCommand('Groups', array(
         	'href' => JRoute::_('index.php?option=com_cache&view=groups'),
-        	'active' => true 
+        	'active' => ($name == 'group')
         ));
         
         $this->addCommand('Keys', array(
         	'href' => JRoute::_('index.php?option=com_cache&view=keys'),
+            'active' => ($name == 'key')
         ));
          
         return parent::getCommands();

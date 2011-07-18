@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: abstract.php 2843 2011-02-28 23:29:57Z johanjanssens $
+* @version		$Id: abstract.php 3663 2011-06-28 12:31:32Z johanjanssens $
 * @category		Koowa
 * @package      Koowa_Filter
 * @copyright    Copyright (C) 2007 - 2010 Johan Janssens. All rights reserved.
@@ -144,13 +144,15 @@ abstract class KFilterAbstract implements KFilterInterface
 	 * Add a filter based on priority
 	 * 
 	 * @param object 	A KFilter
-	 * @param integer	The filter priority
+	 * @param integer	The command priority, usually between 1 (high priority) and 5 (lowest), 
+     *                  default is 3. If no priority is set, the command priority will be used 
+     *                  instead.
 	 *
-	 * @return this
+	 * @return KFilterAbstract
 	 */
-	public function addFilter(KFilterInterface $filter)
+	public function addFilter(KFilterInterface $filter, $priority = null)
 	{	
-		$this->_chain->enqueue($filter);
+		$this->_chain->enqueue($filter, $priority);
 		return $this;
 	}
 	

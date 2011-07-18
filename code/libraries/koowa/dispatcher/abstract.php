@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: abstract.php 3620 2011-06-26 16:10:00Z johanjanssens $
+ * @version		$Id: abstract.php 3681 2011-07-11 13:02:19Z johanjanssens $
  * @category	Koowa
  * @package		Koowa_Dispatcher
  * @copyright	Copyright (C) 2007 - 2010 Johan Janssens. All rights reserved.
@@ -79,18 +79,9 @@ abstract class KDispatcherAbstract extends KControllerAbstract
 		    if(!($this->_controller instanceof KIdentifier)) {
 		        $this->setController($this->_controller);
 			}
-			
-			/* 
-         	 * Disable controller persistency on non-HTTP requests, e.g. AJAX, and requests containing 
-         	 * the tmpl variable set to component, e.g. requests using modal boxes. This avoids 
-         	 * changing the model state session variable of the requested model, which is often 
-         	 * undesirable under these circumstances. 
-         	 */  
-            $persistable = (KRequest::type() == 'HTTP' && KRequest::get('get.tmpl','cmd') != 'component');
 		    
 		    $config = array(
         		'request' 	   => $this->_request,
-        		'persistable'  => $persistable,
 			    'dispatched'   => true	
         	);
         	

@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: apc.php 837 2011-04-06 00:58:44Z johanjanssens $
+ * @version		$Id: apc.php 2057 2011-06-27 20:09:16Z johanjanssens $
  * @package		Joomla.Framework
  * @subpackage	Cache
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters. All rights reserved.
@@ -63,8 +63,8 @@ class JCacheStorageApc extends JCacheStorage
 
 			if ($parts !== false && $parts[0] == $secret &&  $parts[1] == 'cache') 
 			{
-				$data = array();
-				$data['name']  = $key['name'];
+			    $data = array();
+				$data['name']  = $key['info'];
 				$data['hash']  = $parts[4];
 				$data['group'] = $parts[3];
 				$data['site']  = $parts[2];

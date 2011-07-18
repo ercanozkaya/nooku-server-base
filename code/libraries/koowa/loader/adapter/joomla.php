@@ -1,6 +1,6 @@
 <?php
 /**
- * @version 	$Id: joomla.php 2932 2011-03-17 21:41:03Z johanjanssens $
+ * @version 	$Id: joomla.php 3672 2011-06-30 20:55:21Z johanjanssens $
  * @category	Koowa
  * @package		Koowa_Loader
  * @subpackage 	Adapter
@@ -47,10 +47,10 @@ class KLoaderAdapterJoomla extends KLoaderAdapterAbstract
 				 return;
 			}
 
-			$classes = JLoader::register();
-			if(array_key_exists( $class, $classes)) {
-				$path = $classes[$class];
-			}
+		    $classes = method_exists('JLoader','getClassList') ? JLoader::getClassList() : JLoader::register();
+ 			if(array_key_exists( $class, $classes)) {
+ 				$path = $classes[$class];
+ 			}
 		} 
 		
 		return $path;

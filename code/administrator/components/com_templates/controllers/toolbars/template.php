@@ -1,6 +1,6 @@
 <?php
 /**
- * @version     $Id: template.php 1895 2011-06-23 17:14:43Z johanjanssens $
+ * @version     $Id: template.php 2100 2011-06-29 23:56:52Z johanjanssens $
  * @category	Nooku
  * @package     Nooku_Server
  * @subpackage  Languages
@@ -21,7 +21,7 @@ class ComTemplatesControllerToolbarTemplate extends ComDefaultControllerToolbarD
 {
     public function getCommands()
     {
-        $this->addSeperator()
+        $this->addSeparator()
              ->addPreview();
 
         return parent::getCommands();

@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: users.php 1934 2011-06-23 19:33:53Z ercanozkaya $
+ * @version		$Id: users.php 2092 2011-06-29 12:57:25Z ercanozkaya $
  * @category	Nooku
  * @package		Nooku_Server
  * @subpackage	Users
@@ -23,8 +23,9 @@ class ComUsersDatabaseTableUsers extends KDatabaseTableDefault
 	{
 	    parent::__construct($config);
 
-	    //Make sure the email field is unique
+	    //Make sure the email and username fields are unique
 	    $this->getColumn('email')->unique = true;
+	    $this->getColumn('username')->unique = true;
 
 	    $this->getColumn('users_group_id')->default = 0;
 	    $this->getColumn('enabled')->default = 1;

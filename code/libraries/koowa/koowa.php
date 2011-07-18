@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: koowa.php 3088 2011-04-08 11:42:24Z johanjanssens $
+* @version		$Id: koowa.php 3673 2011-06-30 23:14:16Z johanjanssens $
 * @category		Koowa
 * @copyright    Copyright (C) 2007 - 2010 Johan Janssens. All rights reserved.
 * @license      GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
@@ -27,7 +27,7 @@ class Koowa
      * 
      * @var string
      */
-    const VERSION = '0.7.0-alpha-2';
+    const VERSION = '0.7.0-alpha-3';
     
     /**
      * Path to Koowa libraries

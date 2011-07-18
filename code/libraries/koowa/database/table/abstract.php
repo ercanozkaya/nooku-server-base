@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: abstract.php 3650 2011-06-27 16:59:18Z johanjanssens $
+ * @version		$Id: abstract.php 3651 2011-06-27 18:36:29Z johanjanssens $
  * @category	Koowa
  * @package     Koowa_Database
  * @subpackage  Table
@@ -266,7 +266,7 @@ abstract class KDatabaseTableAbstract extends KObject implements KObjectIdentifi
      */
 	public function hasBehavior($behavior)
 	{ 
-	    return isset($this->_behaviors[$behavior]); 
+	    return isset($this->getSchema()->behaviors[$behavior]); 
 	}
     
 	/**
@@ -709,7 +709,7 @@ abstract class KDatabaseTableAbstract extends KObject implements KObjectIdentifi
                     if($this->getIdentityColumn()) {
                         $data[$this->getIdentityColumn()] = $this->_database->getInsertId();
                     }
-                
+                    
                     //Reverse apply the column mappings and set the data in the row
                     $context->data->setData($this->mapColumns($data, true), false)
                                   ->setStatus(KDatabase::STATUS_CREATED);

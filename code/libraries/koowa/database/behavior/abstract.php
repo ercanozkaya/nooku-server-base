@@ -1,6 +1,6 @@
 <?php
 /**
- * @version 	$Id: abstract.php 3560 2011-06-22 00:35:11Z johanjanssens $
+ * @version 	$Id: abstract.php 3690 2011-07-13 00:25:08Z johanjanssens $
  * @category	Koowa
  * @package		Koowa_Database
  * @subpackage 	Behavior
@@ -43,6 +43,11 @@ abstract class KDatabaseBehaviorAbstract extends KMixinAbstract implements KData
 		parent::__construct($config);
 		
 		$this->_priority = $config->priority;
+		
+	    //Automatically mixin the behavior with the mixer (table object)
+		if($config->auto_mixin) {
+		    $this->mixin($this);
+		}
 	}
 	
 	/**
@@ -57,6 +62,7 @@ abstract class KDatabaseBehaviorAbstract extends KMixinAbstract implements KData
     {
     	$config->append(array(
 			'priority'   => KCommand::PRIORITY_NORMAL,
+    	    'auto_mixin' => false
 	  	));
 
     	parent::_initialize($config);

@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: users.php 1963 2011-06-24 20:25:04Z johanjanssens $
+ * @version		$Id: users.php 2100 2011-06-29 23:56:52Z johanjanssens $
  * @category	Nooku
  * @package		Nooku_Server
  * @subpackage	Users
@@ -21,10 +21,10 @@ class ComUsersControllerToolbarUsers extends ComDefaultControllerToolbarDefault
 {
     public function getCommands()
     {
-        $this->addSeperator()
+        $this->addSeparator()
 			 ->addEnable()
 			 ->addDisable()
-			 ->addSeperator();
+			 ->addSeparator();
 			 
 		if($this->getController()->canLogout()) {	 
 			 $this->addLogout();

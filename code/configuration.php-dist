@@ -44,7 +44,7 @@ class JConfig {
 	var $user = '';							// MySQL username
 	var $password = '';						// MySQL password
 	var $db = '';							// MySQL database name
-	var $dbprefix = 'jos_';					// Do not change unless you need to!
+	var $dbprefix = '';					// Do not change unless you need to!
 
 	/* Server Settings */
 	var $secret = 'FBVtggIk5lAzEU9H'; 		//Change this to something more secure

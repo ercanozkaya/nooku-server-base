@@ -84,7 +84,7 @@ INSERT INTO `plugins` VALUES (1, 'Authentication - Joomla', 'joomla', 'authentic
 INSERT INTO `plugins` VALUES (5, 'User - Joomla!', 'joomla', 'user', 0, 0, 1, 0, 0, 0, '0000-00-00 00:00:00', 'autoregister=1\n\n');
 INSERT INTO `plugins` VALUES (26, 'System - Koowa', 'koowa', 'system', 0, 1, 1, 1, 0, 0, '0000-00-00 00:00:00', '');
 INSERT INTO `plugins` VALUES (27, 'System - SEF','sef','system',0,2,1,0,0,0,'0000-00-00 00:00:00','');
-INSERT INTO `plugins` VALUES (28, 'System - Debug', 'debug', 'system', 0, 3, 1, 0, 0, 0, '0000-00-00 00:00:00', 'queries=1\nmemory=1\nlangauge=1\n\n');
+INSERT INTO `plugins` VALUES (28, 'System - Debug', 'debug', 'system', 0, 3, 0, 0, 0, 0, '0000-00-00 00:00:00', 'queries=1\nmemory=1\nlangauge=1\n\n');
 INSERT INTO `plugins` VALUES (30, 'System - Cache', 'cache', 'system', 0, 5, 0, 1, 0, 0, '0000-00-00 00:00:00', 'browsercache=0\ncachetime=15\n\n');
 
 # Newly added for Nooku Server
@@ -343,8 +343,8 @@ CREATE TABLE `core_acl_aro_sections` (
 
 INSERT INTO `core_acl_aro_sections` VALUES (10,'users',1,'Users',0);
 
-INSERT INTO `core_acl_aro` VALUES (10, 'users', '62', 0, 'Administrators', 0);
+INSERT INTO `core_acl_aro` VALUES (10, 'users', '62', 0, 'Administrator', 0);
 
 INSERT INTO `core_acl_groups_aro_map` VALUES (25, '', 10);
 
-INSERT INTO `users` VALUES (62, 'Administrators', 'admin', 'admin@admin.com', 'e389d8c7054781b3428c8a08b8d87594:J0Mjx4daffIi91hGGvlXJiwPDvQ8EAMW', 'Super Administrator', 0, 1, 25, '2011-06-21 00:45:11', '2011-06-24 12:15:22', '', 'admin_language=en-GB\nlanguage=en-GB\neditor=none\ntimezone=0\n\n');
+INSERT INTO `users` VALUES (62, 'Administrator', 'admin', 'admin@example.com', 'e389d8c7054781b3428c8a08b8d87594:J0Mjx4daffIi91hGGvlXJiwPDvQ8EAMW', 'Super Administrator', 0, 1, 25, '2011-06-21 00:45:11', '2011-06-24 12:15:22', '', 'admin_language=en-GB\nlanguage=en-GB\neditor=none\ntimezone=0\n\n');

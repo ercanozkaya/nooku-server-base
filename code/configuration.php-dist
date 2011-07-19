@@ -29,8 +29,8 @@ class JConfig {
 	/* Site Settings */
 	var $offline = '0';
 	var $offline_message = 'This site is down for maintenance.<br /> Please check back again soon.';
-	var $sitename = 'Joomla!';			// Name of Joomla site
-	var $editor = 'tinymce';
+	var $sitename = 'Nooku Server Base';			// Name of Joomla site
+	var $editor = 'none';
 	var $list_limit = '20';
 
 	/**
@@ -47,7 +47,7 @@ class JConfig {
 	var $dbprefix = '';					// Do not change unless you need to!
 
 	/* Server Settings */
-	var $secret = 'FBVtggIk5lAzEU9H'; 		//Change this to something more secure
+	var $secret = '4CfnXB01To14eQre'; 		//Change this to something more secure
 	var $gzip = '0';
 	var $error_reporting = '-1';
 	var $ftp_host = '';
@@ -83,15 +83,11 @@ class JConfig {
 
 	/* Debug Settings */
 	var $debug      = '0';
-	var $debug_db 	= '0';
 	var $debug_lang = '0';
 
 	/* SEO Settings */
-	var $sef = '0';
+	var $sef = '1';
 	var $sef_rewrite = '0';
 	var $sef_suffix = '';
-
-	/* Feed Settings */
-	var $feed_limit   = 10;
 }
 ?>
